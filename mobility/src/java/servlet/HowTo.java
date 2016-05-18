@@ -7,24 +7,18 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sql.connexion;
 
 /**
  *
  * @author caron
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "HowTo", urlPatterns = {"/HowTo"})
+public class HowTo extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,41 +33,16 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-                        String name = request.getParameter("login");
-System.out.println("Login :"+name);
-String pass = request.getParameter("pass");
-System.out.println("Pass :"+pass);
-int count=-2;
-String url = "jdbc:oracle:thin:@localhost:1521:XE";
-String sql = "SELECT COUNT (MAILPERSO) AS ttc FROM PROFIL WHERE (MAILPERSO='"+name+"' OR MAILUP10='"+name+"') AND PASS='"+pass+"'";
-System.out.println("Querry :"+sql);
-connexion cx = new connexion("system", "mamans90", url);
-cx.connectionbase();
-cx.create_statement();
-ResultSet p = cx.exec(sql);
-if (p == null) {
-    count =-1;
-} else {
-    while (p.next()) {
-     count=p.getInt("ttc");
-    }
-}
-p.close();
-cx.close();
-// if count !=1 rejette 
-if (count!=1)
-{
-    RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
-    System.out.println("count : "+count);
-    rd.forward(request, response);
-
-} else {
-    RequestDispatcher rd = request.getRequestDispatcher("/adminPanel.jsp");
-    System.out.println("count : "+count);
-    rd.forward(request, response);
-    }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet HowTo</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet HowTo at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

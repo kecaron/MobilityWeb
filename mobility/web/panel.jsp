@@ -16,6 +16,7 @@
     <li><a class="brick navigation" href="#"><span class='icon ion-android-share-alt'></span>Messages</a></li>
     <li><a class="brick users" href="#"><span class='icon ion-person'></span>Evenements</a></li>
     <li><a class="brick settings" href="#"><span class='icon ion-gear-a'></span>Dictionnaire</a></li>
+    <li><a class="brick dashboard" href="profil.jsp"><span class='icon ion-home'></span>Profil</a></li>
   </ul>
 </nav>
 >!--

@@ -5,13 +5,18 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+  <head>
+    <title>Login failed</title>
+  </head>
+  <body bgcolor=#ffffff>
+  <blockquote>
+  <h2>Sorry, your user name and password were not recognized.</h2>
+  <p><b>
+  <a href="/security/index.html">Return to welcome page</a> or 
+           <a href="/security/logout.jsp">logout</a> 
+  </b>
+  </blockquote>
+  </body>
 </html>
+
