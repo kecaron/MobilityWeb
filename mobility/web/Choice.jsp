@@ -3,7 +3,9 @@
     Created on : 23 mai 2016, 16:21:04
     Author     : caron
 --%>
-
+<!-- Détermine si l'utilisateur veut : Ajouter / Modifier / Supprimer : 
+j'ai fait ce choix car simple et rapide à implémenter.
+Possibilité d'embelir par du CSS. -->
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

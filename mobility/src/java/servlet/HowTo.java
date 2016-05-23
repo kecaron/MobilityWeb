@@ -40,12 +40,15 @@ public class HowTo extends HttpServlet {
           String titre =request.getParameter("titre");
           String contenu =request.getParameter("contenu");
           String type =request.getParameter("send");
+          // on récupère les données du formulaire, on vérifie le send qui donne ce que souhaite user(add,supp,update)
           System.out.println(type);
           Howto objet = new Howto();
           objet.setCorpse(contenu);
           objet.setTitle(titre);
+          // revoir l'ID ( long ou string ?) , user doit le fournir ou c'est un ajout automatique ?
           objet.setIdhowto(id);
           RequestDispatcher rd;
+          // on set les items plus le request dispatch : on effectue l'une des 3 actions et si problème on default error
           switch(type)
           {
               case "add" :
@@ -60,7 +63,8 @@ public class HowTo extends HttpServlet {
                  rd.forward(request, response);
           }
           // problème connexion BDD à résoudre, Problème au niveau de l'entrée serveur ?
-         rd = request.getRequestDispatcher("/adminPanel.jsp");
+         // fin de la request on set pour revenir sur l'adminpanel.
+          rd = request.getRequestDispatcher("/adminPanel.jsp");
          rd.forward(request, response);  
         }
     }
