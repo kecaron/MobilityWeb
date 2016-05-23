@@ -59,7 +59,7 @@ public class HowTo extends HttpServlet {
                  rd = request.getRequestDispatcher("/error.jsp");
                  rd.forward(request, response);
           }
-          // problème connexion BDD à résoudre.
+          // problème connexion BDD à résoudre, Problème au niveau de l'entrée serveur ?
          rd = request.getRequestDispatcher("/adminPanel.jsp");
          rd.forward(request, response);  
         }
