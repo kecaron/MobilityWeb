@@ -4,6 +4,7 @@
     Author     : caron
 --%>
 
+<%@page import="bean.beanprofil"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,9 +12,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <h1>Hello : Voici tes Notes </h1>
-        <table>
-
+        <title>JSP Page</title>
+    </head>
+        <%@include  file="sideMenu.html" %>
 
       
         <jsp:useBean id="profil" scope="request" class="bean.beanprofil"></jsp:useBean>
@@ -27,35 +28,30 @@
             <th>SUPRIMER </th> 
         </tr>
         <%  
-            Iterator<ArrayList> ite = profil.getNom().iterator();
-            Iterator<ArrayList> ite2 = profil.getPrenom().iterator();
-            Iterator<ArrayList> ite3 = profil.getMail().iterator();
-            String v1;
-            String v2;
-            String v3;
-            while(ite.hasNext() && ite2.hasNext() && ite3.hasNext())
+            Iterator<beanprofil> ite = profil.lst.iterator();
+            beanprofil v1;
+
+            while(ite.hasNext())
             {
-                v1=ite.next().toString();
-                v2=ite2.next().toString();
-                v3=ite.next().toString();
+                v1=ite.next();
                 out.print("<tr>");
                 out.print("<td>");
-                out.print(v1);
+                out.print(v1.getNom());
                 out.print("</td>");
                 out.print("<td>");
-                out.print(v2);
+                out.print(v1.getPrenom());
                 out.print("</td>");
                 out.print("<td>");
-                out.print(v3);
+                out.print(v1.getMail());
                 out.print("</td>");
                 out.print("<td>");
-                 out.print("<a href='/ProfilServelt?param1=ins&param2="+v1+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                 out.print("<a href='/mobility/ProfilServlet2?send=add'><img src='tonimage.jpg' alt='tonimage' /></a>");
                 out.print("</td>");
                 out.print("<td>");
-                 out.print("<a href='/ProfilServelt?param1=mod&param2="+v2+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                 out.print("<a href='/mobility/ProfilServlet2?send=update&mail="+v1.getMail()+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
                 out.print("</td>");
                 out.print("<td>");
-                out.print("<a href='/ProfilServelt?param1=del&param2="+v3+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                out.print("<a href='/mobility/ProfilServlet2?send=supp'><img src='tonimage.jpg' alt='tonimage' /></a>");
                 out.print("</td>");
             }
             %>

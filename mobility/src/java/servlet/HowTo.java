@@ -53,14 +53,18 @@ public class HowTo extends HttpServlet {
           {
               case "add" :
                      objet.inserer();
+                     break;
               case "modif":
                   objet.supprimer();
+                  break;
               case "supp" :
                   objet.update();
+                  break;
       
               default :
                  rd = request.getRequestDispatcher("/error.jsp");
                  rd.forward(request, response);
+                  break;
           }
           // problème connexion BDD à résoudre, Problème au niveau de l'entrée serveur ?
          // fin de la request on set pour revenir sur l'adminpanel.

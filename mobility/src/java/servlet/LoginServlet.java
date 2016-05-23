@@ -45,7 +45,7 @@ String pass = request.getParameter("pass");
 System.out.println("Pass :"+pass);
 int count=-2;
 String url = "jdbc:oracle:thin:@localhost:1521:XE";
-String sql = "SELECT COUNT (MAILPERSO) AS ttc FROM PROFIL WHERE (MAILPERSO='"+name+"' OR MAILUP10='"+name+"') AND PASS='"+pass+"'";
+String sql = "SELECT COUNT (MAILPERSO) AS ttc FROM PROFIL WHERE (MAILPERSO='"+name+"' OR MAILUP10='"+name+"') AND PASSWORD='"+pass+"'";
 System.out.println("Querry :"+sql);
 connexion cx = new connexion("system", "mamans90", url);
 cx.connectionbase();

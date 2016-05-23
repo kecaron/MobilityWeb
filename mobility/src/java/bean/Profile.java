@@ -297,6 +297,42 @@ public class Profile {
         }
     }
     
+    public void send(String id){
+        try{
+            Class.forName(BDD.DRIVER);
+        }
+        catch(ClassNotFoundException ex){
+            System.out.println("La classe "+BDD.DRIVER+"n'a pas été trouvée");
+            ex.printStackTrace();
+        }
+        try{
+            Connection cx=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SYSTEM","mamans90");
+            PreparedStatement pst = cx.prepareStatement("SELECT * FROM PROFIL WHERE ID_ETUDIANT='"+id+"'");
+            ResultSet p = pst.executeQuery();
+            while (p.next()) {
+                this.nom=p.getString("NOM");
+                this.prenom=p.getString("PRENOM");
+                this.password=p.getString("PASSWORD");
+                this.universite=p.getString("UNIVERSITE");
+                this.avatar=p.getString("AVATAR");
+                this.date_naissance=p.getString("DATE_NAISSANCE");
+                this.droit=p.getString("DROIT");
+                this.idetudiant=p.getString("IDETUDIANT");
+                this.mail1=p.getString("MAILPERSO");
+                this.mail2=p.getString("MAILUP10");
+                this.mobile_phone=p.getString("MOBILE_PHONE");
+                this.nationalite=p.getString("NATIONALITE");
+            }
+            pst.close();
+            cx.close();
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur de connection");
+            System.exit(1);
+        }
+    }
+    
+    
     public void afficher(){
         
     }

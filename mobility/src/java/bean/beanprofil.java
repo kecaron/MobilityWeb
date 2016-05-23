@@ -5,6 +5,10 @@
  */
 package bean;
 
+import DOA.BDD;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,23 +23,69 @@ import sql.connexion;
  * @author caron
  */
 public class beanprofil {
-public List Nom = new ArrayList();
-public List Prenom = new ArrayList();
-public List Mail = new ArrayList();
+public String Nom;
+public String Prenom;
+public String Mail;
+public List<beanprofil> lst;
 
+    public beanprofil(String n,String p,String m)
+    {
+        Nom=n;
+        Prenom=p;
+        Mail=m;
+        lst=new ArrayList<beanprofil>();
+    }
+    public beanprofil()
+    {
+        lst=new ArrayList<beanprofil>();
+    }
     
-    public List getNom() {
+    public String getNom() {
         return Nom;
     }
 
-    public List getPrenom() {
+    public String getPrenom() {
         return Prenom;
     }
 
-    public List getMail() {
+    public String getMail() {
         return Mail;
     }
     
+    public void ajoute (beanprofil p)
+    {
+        lst.add(p);
+    }
+    public void send()
+    {
+            try{
+            Class.forName(BDD.DRIVER);
+        }
+        catch(ClassNotFoundException ex){
+            System.out.println("La classe "+BDD.DRIVER+"n'a pas été trouvée");
+            ex.printStackTrace();
+        }
+         
+    String sql="SELECT * FROM PROFIL";
+    System.out.println("Querry :"+sql);
+    try{
+            Connection cx=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SYSTEM","mamans90");
+            PreparedStatement pst = cx.prepareStatement(sql);
+            ResultSet p = pst.executeQuery();
+            while (p.next()) {
+                // ne prends que la dernière colonne 
+            Nom=p.getString("NOM");
+            Prenom=p.getString("PRENOM");
+            Mail=p.getString("MAILPERSO");
+            ajoute(this);
+        }
+        pst.close();
+        cx.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(ProfilServlet.class.getName()).log(Level.SEVERE, null, ex);
+    
+    }
+    }
     
     
 }

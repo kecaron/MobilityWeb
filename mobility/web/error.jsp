@@ -13,7 +13,7 @@
   <blockquote>
   <h2>Sorry, your user name and password were not recognized.</h2>
   <p><b>
-  <a href="/security/index.html">Return to welcome page</a> or 
+  <a href="/mobility/index.html">Return to welcome page</a> or 
            <a href="/security/logout.jsp">logout</a> 
   </b>
   </blockquote>
