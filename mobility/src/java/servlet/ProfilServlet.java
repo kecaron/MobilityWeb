@@ -47,6 +47,7 @@ System.out.println("Querry :"+sql);
     connexion cx = new connexion("system", "mamans90", url);
     cx.connectionbase();
     cx.create_statement();
+    // add it yolo -->
 System.out.println("URL parameter :"+request.getParameter("send"));
 if(request.getParameter("send").equals("first"))
 {  
