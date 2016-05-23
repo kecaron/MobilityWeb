@@ -44,6 +44,7 @@ public class ProfilServlet3 extends HttpServlet {
             RequestDispatcher rd;
             System.out.println("URL parameter :"+request.getParameter("send2"));
             System.out.println("Get in Servlet 3");
+            // troisième entrée : on set la bean pour ajouter / update le profil
             switch (s2)
             {
                 

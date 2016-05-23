@@ -44,7 +44,9 @@ public class ProfilServlet2 extends HttpServlet {
             RequestDispatcher rd;
             System.out.println("Get in Servlet 2");
             System.out.println("URL parameter :"+request.getParameter("send"));
-            // premier check depuis panel : au premier jet on entre dans first pour afficher la base
+            // second check : on regarde ce que l'utilisateur à choisit (add/supp/update)
+            // on récupère le mail via de DoGet (je ne vois pas comment faire autrement)
+            // qu'on dispatch vers la JSP profil2 de la même façon (solution pour stocker le mail? cookie?
             switch (s)
             {
                 case "add":

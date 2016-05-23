@@ -51,7 +51,7 @@
                  out.print("<a href='/mobility/ProfilServlet2?send=update&mail="+v1.getMail()+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
                 out.print("</td>");
                 out.print("<td>");
-                out.print("<a href='/mobility/ProfilServlet2?send=supp'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                out.print("<a href='/mobility/ProfilServlet2?send=supp&mail="+v1.getMail()+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
                 out.print("</td>");
             }
             %>
