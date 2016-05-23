@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+    
         <% 
 String ss =request.getParameter("page");
 %>
