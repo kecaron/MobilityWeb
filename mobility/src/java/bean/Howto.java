@@ -16,12 +16,12 @@ import java.sql.SQLException;
  */
 public class Howto {
     private String idhowto;
-    private String body;
+    private String corpse;
     private String title;
     
     public Howto(){
         this .idhowto= "null";
-        this.body = "texte vide";
+        this.corpse = "texte vide";
         this.title = "titre vide";
     }
 
@@ -40,17 +40,17 @@ public class Howto {
     }
 
     /**
-     * @return the body
+     * @return the corpse
      */
-    public String getBody() {
-        return body;
+    public String getCorpse() {
+        return corpse;
     }
 
     /**
-     * @param body the body to set
+     * @param corpse the corpse to set
      */
-    public void setBody(String body) {
-        this.body = body;
+    public void setCorpse(String corpse) {
+        this.corpse = corpse;
     }
 
     /**
@@ -80,7 +80,7 @@ public class Howto {
             PreparedStatement pst = cx.prepareStatement("INSERT INTO Howto VALUES (?,?,?)");
             pst.setString(1, this.idhowto);
             pst.setString(2, this.title);
-            pst.setString(3, this.body);
+            pst.setString(3, this.corpse);
             pst.executeUpdate();
             pst.close();
             cx.close();
@@ -101,7 +101,7 @@ public class Howto {
         }
         try{
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
-            PreparedStatement pst = cx.prepareStatement("DELETE FROM Todo WHERE idhowto=?");
+            PreparedStatement pst = cx.prepareStatement("DELETE FROM Howto WHERE idhowto=?");
             pst.setString(1, this.idhowto);
             pst.executeUpdate();
             pst.close();
@@ -123,7 +123,7 @@ public class Howto {
         try{
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
             PreparedStatement pst = cx.prepareStatement("UPDATE Howto SET body='?', title='?', WHERE idhowto='?' ");
-            pst.setString(1, this.body);
+            pst.setString(1, this.corpse);
             pst.setString(2, this.title);
             pst.setString(3, this.idhowto);
             pst.executeUpdate();

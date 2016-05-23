@@ -5,8 +5,10 @@
  */
 package servlet;
 
+import bean.Howto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,15 +36,31 @@ public class HowTo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HowTo</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HowTo at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+          String id =request.getParameter("idhowto");
+          String titre =request.getParameter("titre");
+          String contenu =request.getParameter("contenu");
+          String type =request.getParameter("send");
+          System.out.println(type);
+          Howto objet = new Howto();
+          objet.setCorpse(contenu);
+          objet.setTitle(titre);
+          objet.setIdhowto(id);
+          RequestDispatcher rd;
+          switch(type)
+          {
+              case "add" :
+                     objet.inserer();
+              case "modif":
+                  objet.supprimer();
+              case "supp" :
+                  objet.update();
+      
+              default :
+                 rd = request.getRequestDispatcher("/error.jsp");
+                 rd.forward(request, response);
+          }
+         rd = request.getRequestDispatcher("/adminPanel.jsp");
+         rd.forward(request, response);  
         }
     }
 
