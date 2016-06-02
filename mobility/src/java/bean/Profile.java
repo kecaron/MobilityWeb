@@ -281,8 +281,8 @@ public class Profile {
             pst.setString(1, this.nom);
             pst.setString(12, this.idetudiant);
             pst.setString(2, this.prenom);
-            pst.setString(3, this.mail2);
-            pst.setString(4, this.mail1);
+            pst.setString(3, this.mail1);
+            pst.setString(4, this.mail2);
             pst.setString(5, this.mobile_phone);
             pst.setString(6, this.nationalite);
             pst.setString(7, this.droit);
