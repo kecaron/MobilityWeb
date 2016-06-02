@@ -7,6 +7,8 @@ package bean;
 import DOA.BDD;
 import java.beans.*;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -219,19 +221,19 @@ public class Profile {
         }
         try{
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
-            PreparedStatement pst = cx.prepareStatement("INSERT INTO Profile VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement pst = cx.prepareStatement("INSERT INTO Profil VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             pst.setString(1, this.idetudiant);
             pst.setString(2, this.nom);
             pst.setString(3, this.prenom);
-            pst.setString(4, this.mail1);
-            pst.setString(5, this.mail2);
-            pst.setString(6, this.mobile_phone);
-            pst.setString(7, this.nationalite);
-            pst.setString(8, this.droit);
+            pst.setString(4, this.date_naissance);
+            pst.setString(5, this.mobile_phone);
+            pst.setString(6, this.mail1);
+            pst.setString(7, this.mail2);
+            pst.setString(8, this.nationalite);
             pst.setString(9, this.universite);
-            pst.setString(10,this.avatar);
-            pst.setString(11, this.date_naissance);
-            pst.setString(12, this.password);
+            pst.setString(10, this.password);
+            pst.setString(11,this.avatar);
+            pst.setString(12, this.droit);
             pst.executeUpdate();
             pst.close();
             cx.close();
@@ -253,7 +255,7 @@ public class Profile {
         try{
             
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
-            PreparedStatement pst = cx.prepareStatement("DELETE FROM Profile WHERE id_etudiant=?");
+            PreparedStatement pst = cx.prepareStatement("DELETE FROM Profil WHERE idetudiant=?");
             pst.setString(1, this.getIdetudiant());
             pst.executeUpdate();
             pst.close();
@@ -274,12 +276,13 @@ public class Profile {
         }
         try{
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
-            PreparedStatement pst = cx.prepareStatement("UPDATE Profile SET nom='?', prenom='?', date_naissance='?', mobile_phone='?', mail1='?', mail2='?', nationalite='?', universite='?', password='?', avatar='?', droit='?' WHERE id_etudiant='?'");
-            pst.setString(12, this.idetudiant);
+            PreparedStatement pst = cx.prepareStatement("UPDATE Profil SET nom=?, prenom=?, date_naissance=?, mobile_phone=?, mailperso=?, mailup10=?, nationalite=?, universite=?, password=?, avatar=?, droit=? WHERE idetudiant=?");
+            //PreparedStatement pst = cx.prepareStatement("UPDATE Profil SET nom=? WHERE idetudiant=?");
             pst.setString(1, this.nom);
+            pst.setString(12, this.idetudiant);
             pst.setString(2, this.prenom);
-            pst.setString(3, this.mail1);
-            pst.setString(4, this.mail2);
+            pst.setString(3, this.mail2);
+            pst.setString(4, this.mail1);
             pst.setString(5, this.mobile_phone);
             pst.setString(6, this.nationalite);
             pst.setString(7, this.droit);
@@ -290,14 +293,14 @@ public class Profile {
             pst.executeUpdate();
             pst.close();
             cx.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch(SQLException ex){
-            System.out.println("Erreur de connection");
-            System.exit(1);
-        }
+
     }
     
     public void send(String id){
+        System.out.println(id);
         try{
             Class.forName(BDD.DRIVER);
         }
@@ -307,7 +310,7 @@ public class Profile {
         }
         try{
             Connection cx=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SYSTEM","mamans90");
-            PreparedStatement pst = cx.prepareStatement("SELECT * FROM PROFIL WHERE ID_ETUDIANT='"+id+"'");
+            PreparedStatement pst = cx.prepareStatement("SELECT * FROM PROFIL WHERE IDETUDIANT='"+id+"'");
             ResultSet p = pst.executeQuery();
             while (p.next()) {
                 this.nom=p.getString("NOM");

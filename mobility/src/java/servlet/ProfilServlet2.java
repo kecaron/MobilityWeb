@@ -62,7 +62,12 @@ public class ProfilServlet2 extends HttpServlet {
                 case  "supp" :
                     // on set id=mail et on supprime l'etudiant de façon directe.
                     // image et non radio bouton (donc une seule entité par clic)
-                    next.setIdetudiant("mail");next.supprimer(); break;
+                  
+                    next.setIdetudiant(request.getParameter("mail"));
+                    next.supprimer();
+                    rd = request.getRequestDispatcher("/adminPanel.jsp");
+                    rd.forward(request, response);
+                    break;
                 default :    rd = request.getRequestDispatcher("/error.jsp");
     //System.out.println("count : "+count);
     

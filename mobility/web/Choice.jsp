@@ -17,15 +17,16 @@ Possibilité d'embelir par du CSS. -->
     
         <% 
 String ss =request.getParameter("page");
+System.out.println(ss);
 %>
         <form action="<%out.print(ss);%>" method="post">
-       <% if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("Todo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp") || ss.equals("Message.jsp") )
+       <% if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("toDo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp") || ss.equals("Message.jsp") )
         {
             out.print("<button name='send' type='submit' value='add'>Ajouter </button><BR>");
-            if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("Todo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp"))
+            if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("toDo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp"))
             {
                 out.print("<button name='send' type='submit' value='modif'>Modifier </button><BR>");
-                if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("Todo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp"))
+                if(ss.equals("Howto.jsp") || ss.equals("profil.jsp") || ss.equals("toDo.jsp") || ss.equals("Learns.jsp") || ss.equals("Words.jsp"))
                 {
                     out.print("<button name='send' type='submit' value='supp'>Supprimer </button><BR>");
                 }

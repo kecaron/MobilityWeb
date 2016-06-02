@@ -37,7 +37,7 @@
                     <form role="form" action="toDoServlet" method="post">
                            <label>Task : </label>
                            <input type="text" placeholder="Task..." name="task" id="task" />
-                           <input type="submit" value="Create" >
+                           <input type="submit" value="<%=request.getParameter("send")%>" name="send" >
                     </form>
                 </div>
             </div>

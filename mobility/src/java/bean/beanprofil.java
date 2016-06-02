@@ -26,14 +26,13 @@ public class beanprofil {
 public String Nom;
 public String Prenom;
 public String Mail;
-public List<beanprofil> lst;
+public static List<beanprofil> lst;
 
     public beanprofil(String n,String p,String m)
     {
         Nom=n;
         Prenom=p;
         Mail=m;
-        lst=new ArrayList<beanprofil>();
     }
     public beanprofil()
     {
@@ -52,10 +51,6 @@ public List<beanprofil> lst;
         return Mail;
     }
     
-    public void ajoute (beanprofil p)
-    {
-        lst.add(p);
-    }
     public void send()
     {
             try{
@@ -77,7 +72,7 @@ public List<beanprofil> lst;
             Nom=p.getString("NOM");
             Prenom=p.getString("PRENOM");
             Mail=p.getString("MAILPERSO");
-            ajoute(this);
+            lst.add(new beanprofil(Nom,Prenom,Mail));
         }
         pst.close();
         cx.close();

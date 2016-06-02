@@ -23,53 +23,58 @@
     %>
     <body>
         <div>
-            <form  method="POST" action="ProfileServlet3">
+            <form  method="POST" action="ProfilServlet3">
 
       <div>
         <label for="nom">nom/</label>
-        <input type="text" name="nom" value='<%p.getNom();%>' />
+        <input type="text" name="nom" value='<%=p.getNom()%>' />
     </div>
     <div>
         <label for="prenom">prenom :</label>
-        <input type="text" name="prenom" value='<%p.getPrenom();%>'/>
+        <input type="text" name="prenom" value='<%=p.getPrenom()%>'/>
+    </div>
+    
+    <div>
+        <label for="password">password :</label>
+        <input type="text" name="password" value='<%=p.getPassword()%>'/>
     </div>
             
             <div>
         <label for="date_naissance">date_naissance :</label>
-        <input type="text" name="date_naissance" value='<%p.getDate_naissance();%>'/>
+        <input type="text" name="date_naissance" value='<%=p.getDate_naissance()%>'/>
     </div>
     
           <div>
-        <label for="mobile_phone">mobile_phone/</label>
-        <input type="text" name="mobile_phone value='<%p.getMobile_phone();%>'" />
+        <label for="mobile_phone">mobile_phone :</label>
+        <input type="text" name="mobile_phone" value='<%=p.getMobile_phone()%>'/>
     </div>
     <div>
         <label for="mail1">mail1 :</label>
-        <input type="text" name="mail1" value='<%p.getMail1();%>'/>
+        <input type="text" name="mail1" value='<%=p.getMail1()%>'>
     </div>
             
             <div>
         <label for="mail2">mail2 :</label>
-        <input type="text" name="mail2" value='<%p.getMail2();%>'/>
+        <input type="text" name="mail2" value='<%=p.getMail2()%>'/>
     </div>      <div>
         <label for="nationalite">nationalite/</label>
-        <input type="text" name="nationalite" value='<%p.getNationalite();%>' />
+        <input type="text" name="nationalite" value='<%=p.getNationalite()%>' />
     </div>
     <div>
         <label for="universite">universite/</label>
-        <input type="text" name="universite" value='<%p.getUniversite();%>' />
+        <input type="text" name="universite" value='<%=p.getUniversite()%>' />
     </div>
     <div>
         <label for="avatar">avatar :</label>
-        <input type="text" name="avatar" value='<%p.getAvatar();%>'/>
+        <input type="text" name="avatar" value='<%=p.getAvatar()%>'/>
     </div>
             
             <div>
         <label for="droit">droit :</label>
-        <input type="text" name="droit" value='<%p.getDroit();%>'/>
+        <input type="text" name="droit" value='<%=p.getDroit()%>'/>
     </div>
      <label for="send2"> Send it :</label>
-    <input type="submit" name="send2" value='<%request.getParameter("send");%>'>
+    <input type="submit" name="send2" value='<%=request.getParameter("send")%>'>
             </form>
     
         </div>
