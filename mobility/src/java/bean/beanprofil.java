@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import servlet.ProfilServlet;
+import servlet.AfficheAllProfilServlet;
 import sql.connexion;
 
 /**
@@ -77,7 +77,7 @@ public static List<beanprofil> lst;
         pst.close();
         cx.close();
     } catch (SQLException ex) {
-        Logger.getLogger(ProfilServlet.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AfficheAllProfilServlet.class.getName()).log(Level.SEVERE, null, ex);
     
     }
     }

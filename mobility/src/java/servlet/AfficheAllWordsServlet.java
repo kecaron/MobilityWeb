@@ -6,6 +6,7 @@
 package servlet;
 
 import bean.Profile;
+import bean.Words;
 import bean.beanprofil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author caron
  */
-@WebServlet(name = "ProfilServlet2", urlPatterns = {"/ProfilServlet2"})
-public class ProfilServlet2 extends HttpServlet {
+@WebServlet(name = "AfficheAllWordsServlet", urlPatterns = {"/AfficheAllWordsServlet"})
+public class AfficheAllWordsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,43 +38,20 @@ public class ProfilServlet2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            beanprofil profil = new beanprofil();
-            Profile next = new Profile();
+            //beanprofil profil = new beanprofil();
+            Words next = new Words();
             String s=request.getParameter("send");
             String s2=request.getParameter("send2");
             RequestDispatcher rd;
-            System.out.println("Get in Servlet 2");
             System.out.println("URL parameter :"+request.getParameter("send"));
-            System.out.println("URL parameter :"+request.getParameter("mail"));
-            // second check : on regarde ce que l'utilisateur à choisit (add/supp/update)
-            // on récupère le mail via de DoGet (je ne vois pas comment faire autrement)
-            // qu'on dispatch vers la JSP profil2 de la même façon (solution pour stocker le mail? cookie?
-            switch (s)
-            {
-                case "add":
-                    //on entre dans le formulaire pour ajouter une personne
-                     rd = request.getRequestDispatcher("/profil2.jsp?send=add");
-                    rd.forward(request, response);
-                    break;
-                case "update":
-                    // on entre dans le formulaire pré-remplie pour modifier une personne
-                    rd = request.getRequestDispatcher("/profil2.jsp?send=update&mail="+request.getParameter("mail"));
+            System.out.println("Get in Servlet 1");
+            // premier check depuis panel : au premier jet on entre dans first pour afficher la base
+                    next.send(); 
+                    request.setAttribute("next", next);
+                    rd = request.getRequestDispatcher("/AffichWords.jsp");
                     // System.out.println("count : "+count);
-                    rd.forward(request, response);break;
-                case  "supp" :
-                    // on set id=mail et on supprime l'etudiant de façon directe.
-                    // image et non radio bouton (donc une seule entité par clic)
-                  
-                    next.setIdetudiant(request.getParameter("mail"));
-                    next.supprimer();
-                    rd = request.getRequestDispatcher("/adminPanel.jsp");
                     rd.forward(request, response);
-                    break;
-                default :    rd = request.getRequestDispatcher("/error.jsp");
-    //System.out.println("count : "+count);
-    
-    rd.forward(request, response);
-            }
+            
         }
     }
 
@@ -89,7 +67,13 @@ public class ProfilServlet2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         processRequest(request, response);
+        }
+        catch(ServletException | IOException E)
+        {
+            
+        }
     }
 
     /**
@@ -103,7 +87,13 @@ public class ProfilServlet2 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         processRequest(request, response);
+        }
+        catch(ServletException | IOException E)
+        {
+            
+        }
     }
 
     /**

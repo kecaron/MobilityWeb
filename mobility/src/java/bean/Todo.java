@@ -5,8 +5,11 @@
  */
 package bean;
 import DOA.BDD;
+import static bean.Words.lst;
 import java.beans.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author titadone
@@ -17,13 +20,22 @@ public class Todo {
     private String status;
     private String creator;
     private String dateCreation;
-    
+    public static List<Todo> lst;
     public Todo(){
         this.idtodo="";
         this.task="";
         this.status ="";
         this.creator="";
         this.dateCreation="";
+        lst = new ArrayList<Todo>();
+    }
+     public Todo(String id,String task,String status,String creator,String date){
+        this.idtodo=id;
+        this.task=task;
+        this.status =status;
+        this.creator=creator;
+        this.dateCreation=date;
+        lst = new ArrayList<Todo>();
     }
 
     /**
@@ -167,5 +179,32 @@ public class Todo {
             System.exit(1);
         }
     }
-    
+    public void send() {
+        //System.out.println(id);
+        try{
+            Class.forName(BDD.DRIVER);
+        }
+        catch(ClassNotFoundException ex){
+            System.out.println("La classe "+BDD.DRIVER+"n'a pas été trouvée");
+            ex.printStackTrace();
+        }
+        try{
+            Connection cx=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SYSTEM","mamans90");
+            PreparedStatement pst = cx.prepareStatement("SELECT * FROM TODO");
+            ResultSet p = pst.executeQuery();
+            while (p.next()) {
+                idtodo=p.getString("idtodo");
+                task=p.getString("task");
+                status=p.getString("status");
+                creator=p.getString("creator");
+                dateCreation=p.getString("datecreation");
+                lst.add(new Todo(idtodo,task,status,creator,dateCreation));
+            }
+            
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur de connection");
+            System.exit(1);
+        }
+    }
 }

@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Mobility</title>
     </head>
         <%@include  file="sideMenu.html" %>
 
@@ -20,10 +20,10 @@
         <jsp:useBean id="profil" scope="request" class="bean.beanprofil"></jsp:useBean>
     <table>  
         <tr>  
-            <th>NOM  </th>  
-            <th>PRENOM </th>  
-            <th>MAIL  </th>  
-            <th>INSERER </th> 
+            <th>NOM      </th>  
+            <th>PRENOM   </th>  
+            <th>MAIL     </th>  
+            <th>INSERER  </th> 
             <th>MODIFIER </th>  
             <th>SUPRIMER </th> 
         </tr>
@@ -45,13 +45,13 @@
                 out.print(v1.getMail());
                 out.print("</td>");
                 out.print("<td>");
-                 out.print("<a href='/mobility/ProfilServlet2?send=add'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                 out.print("<a href='/mobility/ProfilServlet2?send=add'><img src='add.png' alt='tonimage' /></a>");
                 out.print("</td>");
                 out.print("<td>");
-                 out.print("<a href='/mobility/ProfilServlet2?send=update&mail="+v1.getMail()+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                 out.print("<a href='/mobility/ProfilServlet2?send=update&mail="+v1.getMail()+"'><img src='modif.png' alt='tonimage' /></a>");
                 out.print("</td>");
                 out.print("<td>");
-                out.print("<a href='/mobility/ProfilServlet2?send=supp&mail="+v1.getMail()+"'><img src='tonimage.jpg' alt='tonimage' /></a>");
+                out.print("<a href='/mobility/ProfilServlet2?send=supp&mail="+v1.getMail()+"'><img src='suppr.png' alt='tonimage' /></a>");
                 out.print("</td>");
             }
             %>

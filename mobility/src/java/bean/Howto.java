@@ -5,11 +5,15 @@
  */
 package bean;
 import DOA.BDD;
+import static bean.Words.lst;
 import java.beans.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author titadone
@@ -18,11 +22,18 @@ public class Howto {
     private String idhowto;
     private String corpse;
     private String title;
+    public static List<Howto> lst;
     
     public Howto(){
         this .idhowto= "null";
         this.corpse = "texte vide";
         this.title = "titre vide";
+        lst = new ArrayList<Howto>();
+    }
+    public Howto(String id,String t,String c){
+        this .idhowto=id;
+        this.corpse =c;
+        this.title =t;
     }
 
     /**
@@ -122,7 +133,7 @@ public class Howto {
         }
         try{
             Connection cx=DriverManager.getConnection(BDD.URL,BDD.LOGIN,BDD.PASSWORD);
-            PreparedStatement pst = cx.prepareStatement("UPDATE Howto SET body='?', title='?', WHERE idhowto='?' ");
+            PreparedStatement pst = cx.prepareStatement("UPDATE Howto SET  title=?, corpse=? WHERE idhowto=? ");
             pst.setString(1, this.corpse);
             pst.setString(2, this.title);
             pst.setString(3, this.idhowto);
@@ -135,4 +146,33 @@ public class Howto {
             System.exit(1);
         }
     }
+    
+    public void send() {
+        //System.out.println(id);
+        try{
+            Class.forName(BDD.DRIVER);
+        }
+        catch(ClassNotFoundException ex){
+            System.out.println("La classe "+BDD.DRIVER+"n'a pas été trouvée");
+            ex.printStackTrace();
+        }
+        try{
+            Connection cx=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","SYSTEM","mamans90");
+            PreparedStatement pst = cx.prepareStatement("SELECT * FROM HOWTO");
+            ResultSet p = pst.executeQuery();
+            while (p.next()) {
+                idhowto=p.getString("idhowto");
+                title=p.getString("title");
+                corpse=p.getString("corpse");
+                lst.add(new Howto(idhowto,title,corpse));
+                       
+            }
+            
+        }
+        catch(SQLException ex){
+            System.out.println("Erreur de connection");
+            System.exit(1);
+        }
+    
+}
 }

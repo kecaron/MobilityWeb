@@ -16,7 +16,7 @@
     <body>
         <div id="layout">
             <%@include  file="sideMenu.html" %>
-            <div id="main">
+            <!--<div id="main">
                 <div class="header">
                     <h1>Page Title</h1>
                     <h2>A subtitle for your page goes here</h2>
@@ -54,7 +54,7 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div>-->
 
 
 

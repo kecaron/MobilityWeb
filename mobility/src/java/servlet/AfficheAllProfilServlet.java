@@ -5,22 +5,32 @@
  */
 package servlet;
 
-import bean.Howto;
+import DOA.BDD;
+import bean.Profile;
+import bean.beanprofil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sql.connexion;
 
 /**
  *
  * @author caron
  */
-@WebServlet(name = "HowTo", urlPatterns = {"/HowTo"})
-public class HowTo extends HttpServlet {
+@WebServlet(name = "ProfilServlet", urlPatterns = {"/ProfilServlet"})
+public class AfficheAllProfilServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,41 +45,45 @@ public class HowTo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-          String id =request.getParameter("idhowto");
-          String titre =request.getParameter("titre");
-          String contenu =request.getParameter("contenu");
-          String type =request.getParameter("send");
-          // on récupère les données du formulaire, on vérifie le send qui donne ce que souhaite user(add,supp,update)
-          System.out.println(type);
-          Howto objet = new Howto();
-          objet.setCorpse(contenu);
-          objet.setTitle(titre);
-          // revoir l'ID ( long ou string ?) , user doit le fournir ou c'est un ajout automatique ?
-          objet.setIdhowto(id);
-          RequestDispatcher rd;
-          // on set les items plus le request dispatch : on effectue l'une des 3 actions et si problème on default error
-          switch(type)
-          {
-              case "add" :
-                     objet.inserer();
-                     break;
-              case "modif":
-                  objet.supprimer();
-                  break;
-              case "supp" :
-                  objet.update();
-                  break;
-      
-              default :
-                 rd = request.getRequestDispatcher("/error.jsp");
-                 rd.forward(request, response);
-                  break;
-          }
-          // problème connexion BDD à résoudre, Problème au niveau de l'entrée serveur ?
-         // fin de la request on set pour revenir sur l'adminpanel.
-          rd = request.getRequestDispatcher("/adminPanel.jsp");
-         rd.forward(request, response);  
+            // j'utilise deux beans différent pour question de BDD, après harmonisation il reste que la bean profile
+            beanprofil profil = new beanprofil();
+            Profile next = new Profile();
+            String s=request.getParameter("send");
+            String s2=request.getParameter("send2");
+            RequestDispatcher rd;
+            System.out.println("URL parameter :"+request.getParameter("send"));
+            System.out.println("Get in Servlet 1");
+            // premier check depuis panel : au premier jet on entre dans first pour afficher la base
+            switch (s)
+            {
+                case "first":
+                    profil.send(); 
+                    request.setAttribute("profil", profil);
+                    rd = request.getRequestDispatcher("/AffichProfil.jsp");
+                    // System.out.println("count : "+count);
+                    rd.forward(request, response);
+                    break;
+               
+                default :    
+                    rd = request.getRequestDispatcher("/error.jsp");
+                    //System.out.println("count : "+count); 
+                    rd.forward(request, response);
+            }
+            // quand le formulaire nous redispatch
+
+/**        
+}
+if(request.getParameter("param1").equals("ins"))
+{
+    // redirection formulaire
+}
+if(request.getParameter("param1").equals("del"))
+{
+    sql="DELETE FROM PROFIL WHERE (MAILPERSO ="+ +" OR MAILUP10="+ +")";
+    System.out.println("Querry :"+sql);
+    ResultSet p = cx.exec(sql);
+ }
+**/
         }
     }
 

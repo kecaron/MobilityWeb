@@ -4,6 +4,10 @@
     Author     : Yann
 --%>
 
+<%@page import="java.util.Iterator"%>
+<%@page import="bean.Todo"%>
+<%@page import="bean.Howto"%>
+<%@page import="bean.Howto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,11 +15,57 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="css/side-menu.css">
-        <title>JSP Page</title>
     </head>
     <body>
         <div id="layout">
-            <%@include  file="sideMenu.html" %>
+            <%@include  file="sideMenu.html" %></div>
+        <jsp:useBean id="howto" scope="request" class="bean.Howto"></jsp:useBean>
+        <table>  
+        <tr>  
+            <th>IDTODO  </th>  
+            <th>TASK </th>  
+            <th>STATUS  </th>
+            <th>CREATOR  </th>
+            <th>DATECREATION  </th>
+        </tr>
+        <% 
+                
+  
+            Todo p1 = new Todo();
+            p1.send();
+            Iterator<Todo> ite = p1.lst.iterator();
+            Todo v1;
+                
+            while(ite.hasNext())
+            {
+                v1=ite.next();
+                out.print("<tr>");
+                out.print("<td>");
+                out.print(v1.getIdtodo());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getTask());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getStatus());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getTask());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getStatus());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getCreator());
+                out.print("</td>");
+                out.print("<td>");
+                out.print(v1.getDateCreation());
+                out.print("</td>");
+            }
+                %>
+                
+        </table>
+    <center>
             <div id="main">
                 
                 <div class="header">
@@ -41,7 +91,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+    </center>
         <script src="js/ui.js"></script>
     </body>
 </html>

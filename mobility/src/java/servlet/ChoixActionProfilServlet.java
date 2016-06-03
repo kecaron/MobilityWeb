@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author caron
  */
-@WebServlet(name = "ProfilServlet3", urlPatterns = {"/ProfilServlet3"})
-public class ProfilServlet3 extends HttpServlet {
+@WebServlet(name = "ProfilServlet2", urlPatterns = {"/ProfilServlet2"})
+public class ChoixActionProfilServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,46 +42,33 @@ public class ProfilServlet3 extends HttpServlet {
             String s=request.getParameter("send");
             String s2=request.getParameter("send2");
             RequestDispatcher rd;
-            System.out.println("URL parameter :"+request.getParameter("send2"));
-            System.out.println("Get in Servlet 3");
-            // troisième entrée : on set la bean pour ajouter / update le profil
-            switch (s2)
+            System.out.println("Get in Servlet 2");
+            System.out.println("URL parameter :"+request.getParameter("send"));
+            System.out.println("URL parameter :"+request.getParameter("mail"));
+            // second check : on regarde ce que l'utilisateur à choisit (add/supp/update)
+            // on récupère le mail via de DoGet (je ne vois pas comment faire autrement)
+            // qu'on dispatch vers la JSP profil2 de la même façon (solution pour stocker le mail? cookie?
+            switch (s)
             {
-                
                 case "add":
-                    next.setNom(request.getParameter("nom"));
-                    next.setPrenom(request.getParameter("prenom"));
-                    next.setIdetudiant(request.getParameter("mail1"));
-                    next.setPassword(request.getParameter("password"));
-                    next.setMail1(request.getParameter("mail1"));
-                    next.setMail2(request.getParameter("mail2"));
-                    next.setMobile_phone(request.getParameter("mobile_phone"));
-                    next.setDate_naissance(request.getParameter("date_naissance"));
-                    next.setNationalite(request.getParameter("nationalite"));
-                    next.setDroit(request.getParameter("droit"));
-                    next.setAvatar(request.getParameter("avatar"));
-                    next.setUniversite(request.getParameter("universite"));
-                    next.inserer();
-                     rd = request.getRequestDispatcher("/adminPanel.jsp");
-                    // System.out.println("count : "+count);
-                    rd.forward(request, response);break;
+                    //on entre dans le formulaire pour ajouter une personne
+                     rd = request.getRequestDispatcher("/profil2.jsp?send=add");
+                    rd.forward(request, response);
+                    break;
                 case "update":
-                    next.setNom(request.getParameter("nom"));
-                    next.setPrenom(request.getParameter("prenom"));
-                    next.setIdetudiant(request.getParameter("mail1"));
-                    next.setPassword(request.getParameter("password"));
-                    next.setMail1(request.getParameter("mail1"));
-                    next.setMail2(request.getParameter("mail2"));
-                    next.setMobile_phone(request.getParameter("mobile_phone"));
-                    next.setDate_naissance(request.getParameter("date_naissance"));
-                    next.setNationalite(request.getParameter("nationalite"));
-                    next.setDroit(request.getParameter("droit"));
-                    next.setAvatar(request.getParameter("avatar"));
-                    next.setUniversite(request.getParameter("universite"));
-                    next.update();
-                    rd = request.getRequestDispatcher("/adminPanel.jsp");
+                    // on entre dans le formulaire pré-remplie pour modifier une personne
+                    rd = request.getRequestDispatcher("/profil2.jsp?send=update&mail="+request.getParameter("mail"));
                     // System.out.println("count : "+count);
                     rd.forward(request, response);break;
+                case  "supp" :
+                    // on set id=mail et on supprime l'etudiant de façon directe.
+                    // image et non radio bouton (donc une seule entité par clic)
+                  
+                    next.setIdetudiant(request.getParameter("mail"));
+                    next.supprimer();
+                    rd = request.getRequestDispatcher("/adminPanel.jsp");
+                    rd.forward(request, response);
+                    break;
                 default :    rd = request.getRequestDispatcher("/error.jsp");
     //System.out.println("count : "+count);
     

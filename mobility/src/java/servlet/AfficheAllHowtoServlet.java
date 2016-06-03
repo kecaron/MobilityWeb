@@ -5,32 +5,23 @@
  */
 package servlet;
 
-import DOA.BDD;
-import bean.Profile;
-import bean.beanprofil;
+import bean.Howto;
+import bean.Words;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import sql.connexion;
 
 /**
  *
  * @author caron
  */
-@WebServlet(name = "ProfilServlet", urlPatterns = {"/ProfilServlet"})
-public class ProfilServlet extends HttpServlet {
+@WebServlet(name = "AfficheAllHowtoServlet", urlPatterns = {"/AfficheAllHowtoServlet"})
+public class AfficheAllHowtoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,45 +36,18 @@ public class ProfilServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // j'utilise deux beans différent pour question de BDD, après harmonisation il reste que la bean profile
-            beanprofil profil = new beanprofil();
-            Profile next = new Profile();
+            Howto next = new Howto();
             String s=request.getParameter("send");
             String s2=request.getParameter("send2");
             RequestDispatcher rd;
             System.out.println("URL parameter :"+request.getParameter("send"));
             System.out.println("Get in Servlet 1");
             // premier check depuis panel : au premier jet on entre dans first pour afficher la base
-            switch (s)
-            {
-                case "first":
-                    profil.send(); 
-                    request.setAttribute("profil", profil);
-                    rd = request.getRequestDispatcher("/profil.jsp");
+                    next.send(); 
+                    request.setAttribute("howto", next);
+                    rd = request.getRequestDispatcher("/AffichHowto.jsp");
                     // System.out.println("count : "+count);
                     rd.forward(request, response);
-                    break;
-               
-                default :    
-                    rd = request.getRequestDispatcher("/error.jsp");
-                    //System.out.println("count : "+count); 
-                    rd.forward(request, response);
-            }
-            // quand le formulaire nous redispatch
-
-/**        
-}
-if(request.getParameter("param1").equals("ins"))
-{
-    // redirection formulaire
-}
-if(request.getParameter("param1").equals("del"))
-{
-    sql="DELETE FROM PROFIL WHERE (MAILPERSO ="+ +" OR MAILUP10="+ +")";
-    System.out.println("Querry :"+sql);
-    ResultSet p = cx.exec(sql);
- }
-**/
         }
     }
 
